@@ -92,6 +92,8 @@ a{text-decoration:none;color:inherit;}
 /* ── NAV ── */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;height:100px;padding:0 52px;align-items:center;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(180deg,rgba(20,32,56,0.94),rgba(20,32,56,0.84));backdrop-filter:blur(22px) saturate(130%);border-bottom:1px solid rgba(255,255,255,0.08);box-shadow:0 1px 0 rgba(201,169,110,0.08);transition:background 220ms var(--ease-out),box-shadow 220ms var(--ease-out);}
 nav.scrolled{background:linear-gradient(180deg,rgba(20,32,56,0.98),rgba(20,32,56,0.92));box-shadow:0 16px 48px rgba(0,0,0,0.28),0 1px 0 rgba(201,169,110,0.10);}
+.nav-progress{position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--accent);transform:scaleX(0);transform-origin:left;will-change:transform;pointer-events:none;}
+@media(prefers-reduced-motion:reduce){.nav-progress{display:none;}}
 .nav-brand{
   display:flex;
   align-items:center;
@@ -179,19 +181,23 @@ nav.menu-open .nav-toggle span::after{top:0;transform:rotate(-45deg);}
 .social-link:focus-visible{outline:2px solid rgba(201,169,110,0.85);outline-offset:3px;}
 
 /* ── HERO ── */
-#hero{min-height:100vh;padding:68px 52px 0;background:radial-gradient(circle at 78% 43%,rgba(201,169,110,0.10),transparent 34%),radial-gradient(circle at 18% 78%,rgba(75,101,154,0.16),transparent 42%),linear-gradient(135deg,#0A1020 0%,var(--navy) 48%,#111C34 100%);display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:64px;position:relative;overflow:hidden;isolation:isolate;}
+#hero{min-height:100vh;padding:140px 52px 64px;background:radial-gradient(circle at 78% 43%,rgba(201,169,110,0.10),transparent 34%),radial-gradient(circle at 18% 78%,rgba(75,101,154,0.16),transparent 42%),linear-gradient(135deg,#0A1020 0%,var(--navy) 48%,#111C34 100%);display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:64px;position:relative;overflow:hidden;isolation:isolate;}
 #hero::before{content:'';position:absolute;inset:-24%;z-index:0;pointer-events:none;background:radial-gradient(circle at 72% 26%,rgba(201,169,110,0.26),transparent 17%),radial-gradient(circle at 26% 72%,rgba(75,101,154,0.22),transparent 20%),conic-gradient(from 145deg at 68% 42%,transparent 0 28%,rgba(201,169,110,0.16) 36%,transparent 48% 100%);filter:blur(54px);opacity:0.58;transform:translate3d(0,0,0);animation:auroraDrift 18s var(--ease-in-out) infinite alternate;}
 #hero::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(112deg,transparent 0 34%,rgba(255,255,255,0.05) 44%,rgba(201,169,110,0.11) 50%,transparent 62% 100%);mask-image:linear-gradient(90deg,transparent,black 20%,black 72%,transparent);opacity:0.72;}
 .hero-grid-bg{position:absolute;inset:0;z-index:1;pointer-events:none;background-image:linear-gradient(rgba(201,169,110,0.026) 1px,transparent 1px),linear-gradient(90deg,rgba(201,169,110,0.024) 1px,transparent 1px);background-size:68px 68px;mask-image:radial-gradient(circle at 42% 42%,black 0 58%,transparent 82%);}
 .hero-grid-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(201,169,110,0.10),transparent);transform:translateX(-100%);animation:gridSweep 7s var(--ease-in-out) infinite 1.4s;opacity:0.35;}
 .hero-orb-1{position:absolute;top:-160px;right:-80px;z-index:1;width:680px;height:680px;background:radial-gradient(circle,rgba(201,169,110,0.12) 0%,rgba(201,169,110,0.04) 34%,transparent 68%);pointer-events:none;filter:blur(2px);animation:orbBreath 8s var(--ease-in-out) infinite alternate;}
+.cursor-glow{position:absolute;left:0;top:0;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(201,169,110,0.10),transparent 70%);opacity:0;pointer-events:none;transform:translate3d(-210px,-210px,0);transition:opacity 300ms var(--ease-out);will-change:transform,opacity;mix-blend-mode:screen;}
+#hero .cursor-glow{z-index:2;}
+#process .cursor-glow,#cta-footer .cursor-glow{z-index:1;}
+@media(prefers-reduced-motion:reduce),(hover:none),(pointer:coarse){.cursor-glow{display:none;}}
 .hero-left{position:relative;z-index:3;min-width:0;}
 .hero-eyebrow{display:inline-flex;align-items:center;gap:10px;background:rgba(201,169,110,0.12);backdrop-filter:blur(16px);border:1px solid rgba(201,169,110,0.26);box-shadow:inset 0 1px 0 rgba(255,255,255,0.08),0 14px 40px rgba(0,0,0,0.22);padding:7px 14px;border-radius:100px;margin-bottom:32px;opacity:0;animation:fadeUp 620ms var(--ease-out) forwards 0.1s;}
 .hero-eyebrow-dot{width:5px;height:5px;background:var(--accent);border-radius:50%;}
 .hero-eyebrow-text{font-size:10px;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);}
 h1.hero-h1{font-family:var(--font-d);font-weight:400;font-size:clamp(40px,4.2vw,58px);line-height:1.04;color:var(--white);margin-bottom:12px;opacity:0;animation:fadeUp 620ms var(--ease-out) forwards 0.22s;text-transform:uppercase;}
 .mobile-break{display:none;}
-.hero-h1-emphasis{color:var(--accent);font-weight:700;text-shadow:0 0 32px rgba(201,169,110,0.18);}
+.hero-h1-emphasis{background:linear-gradient(110deg,var(--accent) 30%,#f4e4c1 50%,var(--accent) 70%);background-size:200% auto;background-position:200% center;-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:700;text-shadow:0 0 32px rgba(201,169,110,0.18);animation:heroMetalShimmer 4s var(--ease-in-out) infinite 1.84s;}
 .hero-tagline{font-family:var(--font-d);font-weight:300;font-style:italic;font-size:clamp(16px,1.6vw,22px);color:rgba(255,255,255,0.40);margin-bottom:28px;letter-spacing:0.02em;opacity:0;animation:fadeUp 620ms var(--ease-out) forwards 0.32s;}
 .hero-features{display:flex;gap:0;margin-bottom:36px;opacity:0;animation:fadeUp 620ms var(--ease-out) forwards 0.42s;}
 .hero-feat{font-size:11px;font-weight:400;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.35);padding:0 16px;border-right:1px solid rgba(255,255,255,0.10);}
@@ -199,6 +205,10 @@ h1.hero-h1{font-family:var(--font-d);font-weight:400;font-size:clamp(40px,4.2vw,
 .hero-feat:last-child{border-right:none;}
 .hero-btns{display:flex;gap:14px;align-items:center;opacity:0;animation:fadeUp 620ms var(--ease-out) forwards 0.52s;}
 .btn-primary{
+  --mag-x:0px;
+  --mag-y:0px;
+  --hover-y:0px;
+  --press-scale:1;
   display:inline-flex;
   align-items:center;
   justify-content:center;
@@ -216,18 +226,19 @@ h1.hero-h1{font-family:var(--font-d);font-weight:400;font-size:clamp(40px,4.2vw,
   border-radius:2px;
   border:1px solid rgba(255,255,255,0.18);
   cursor:pointer;
-  transition:transform 140ms var(--ease-out),box-shadow 180ms var(--ease-out),filter 180ms var(--ease-out);
+  transition:transform 200ms var(--ease-out),box-shadow 180ms var(--ease-out),filter 180ms var(--ease-out);
   box-shadow:inset 0 1px 0 rgba(255,255,255,0.38),0 10px 28px rgba(0,0,0,0.22),0 0 0 1px rgba(201,169,110,0.14);
+  transform:translate(var(--mag-x),calc(var(--mag-y) + var(--hover-y))) scale(var(--press-scale));
   will-change:transform;
 }
 .btn-primary::before{content:'';position:absolute;inset:-2px;background:linear-gradient(110deg,transparent 0 32%,rgba(255,255,255,0.42) 48%,transparent 64% 100%);transform:translateX(-120%);transition:transform 700ms var(--ease-out);pointer-events:none;}
 .btn-primary:hover::before{transform:translateX(120%);}
 .btn-primary:hover{
   filter:brightness(1.04);
-  transform:translateY(-2px);
   box-shadow:inset 0 1px 0 rgba(255,255,255,0.46),0 14px 34px rgba(0,0,0,0.28),0 0 0 1px rgba(201,169,110,0.22);
 }
-.btn-primary:active{transform:scale(0.97);}
+.btn-primary.is-magnetic{transition:none;}
+.btn-primary:active{--press-scale:0.97;}
 .btn-primary:focus-visible{outline:2px solid var(--white);outline-offset:3px;}
 .btn-outline{display:inline-flex;align-items:center;gap:8px;color:rgba(255,255,255,0.55);font-size:12px;font-weight:400;letter-spacing:0.13em;text-transform:uppercase;border:1px solid rgba(255,255,255,0.14);padding:13px 24px;border-radius:var(--radius);transition:color 180ms var(--ease-out),border-color 180ms var(--ease-out),transform 140ms var(--ease-out),background-color 180ms var(--ease-out);}
 .btn-outline:hover{color:var(--white);border-color:rgba(255,255,255,0.30);background:rgba(255,255,255,0.03);}
@@ -266,6 +277,29 @@ h1.hero-h1{font-family:var(--font-d);font-weight:400;font-size:clamp(40px,4.2vw,
   line-height:1.45;
   color:rgba(255,255,255,0.62);
 }
+
+/* ── REAL-WORLD EXAMPLES ── */
+#examples{background:linear-gradient(180deg,#F8F8F6 0%,#EEF1F5 100%);padding:82px 52px 88px;position:relative;overflow:hidden;isolation:isolate;}
+#examples::before{content:'';position:absolute;right:-220px;top:-180px;width:620px;height:620px;border-radius:50%;background:radial-gradient(circle,rgba(201,169,110,0.14),transparent 68%);filter:blur(34px);z-index:-1;}
+#examples::after{content:'';position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,169,110,0.28),transparent);}
+.examples-inner{max-width:1140px;margin:0 auto;position:relative;z-index:1;}
+.examples-head{max-width:720px;margin:0 auto 40px;text-align:center;}
+#examples .section-eyebrow{justify-content:center;margin-bottom:14px;}
+#examples .h2-dark{margin-bottom:16px;}
+.examples-intro{font-size:15px;font-weight:300;line-height:1.78;color:var(--ash-2);max-width:660px;margin:0 auto;}
+.examples-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(11,17,32,0.075);border:1px solid rgba(11,17,32,0.075);box-shadow:0 20px 62px rgba(11,17,32,0.10),0 1px 0 rgba(255,255,255,0.86);}
+.example-card{display:flex;flex-direction:column;min-height:292px;background:rgba(255,255,255,0.92);padding:34px 30px 30px;position:relative;overflow:hidden;transition:transform 180ms var(--ease-out),box-shadow 180ms var(--ease-out),background-color 180ms var(--ease-out);will-change:transform;}
+.example-card::before{content:'';position:absolute;inset:-45% -30% auto auto;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(201,169,110,0.12),transparent 70%);opacity:0;transition:opacity 180ms var(--ease-out),transform 220ms var(--ease-out);transform:scale(0.92);pointer-events:none;}
+.example-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),rgba(201,169,110,0.35));transform:scaleX(0);transform-origin:left;transition:transform 240ms var(--ease-out);}
+.example-card:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(11,17,32,0.12);z-index:1;background:#FBFCFE;}
+.example-card:hover::before{opacity:1;transform:scale(1);}
+.example-card:hover::after{transform:scaleX(1);}
+.example-title{font-family:var(--font-d);font-weight:400;font-size:20px;color:var(--navy-2);margin-bottom:12px;line-height:1.18;text-transform:uppercase;}
+.example-text{font-size:13px;font-weight:300;line-height:1.76;color:var(--ash-2);margin-bottom:24px;}
+.example-outcome{margin-top:auto;padding-top:15px;border-top:1px solid rgba(11,17,32,0.09);font-size:12px;font-weight:400;line-height:1.65;color:#58606D;}
+.examples-cta{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;margin-top:38px;padding-top:30px;border-top:1px solid rgba(11,17,32,0.08);text-align:center;}
+.examples-cta-text{font-size:14px;font-weight:300;line-height:1.7;color:var(--ash-2);margin:0;}
+#examples .btn-primary{padding:13px 24px;font-size:11px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.32),0 8px 22px rgba(11,17,32,0.16),0 0 0 1px rgba(201,169,110,0.12);}
 
 /* Hero right — logo panel */
 .hero-right{
@@ -506,12 +540,18 @@ footer{background:var(--navy);padding:28px 52px;border-top:1px solid var(--borde
 @keyframes orbBreath{from{transform:scale(0.96);opacity:0.72}to{transform:scale(1.06);opacity:1}}
 @keyframes haloPulse{from{opacity:0.62;transform:translate(-50%,-50%) scale(0.96)}to{opacity:0.92;transform:translate(-50%,-50%) scale(1.04)}}
 @keyframes glowPulse{from{opacity:0.72;transform:translateX(-50%) scale(0.96)}to{opacity:1;transform:translateX(-50%) scale(1.04)}}
+@keyframes heroMetalShimmer{from{background-position:200% center}to{background-position:-200% center}}
 .reveal{opacity:0;transform:translateY(12px);transition:opacity 480ms var(--ease-out),transform 480ms var(--ease-out);}
 .reveal.visible{opacity:1;transform:translateY(0);}
 
+@media(prefers-reduced-motion:reduce){
+  .hero-h1-emphasis{background:none!important;-webkit-background-clip:border-box;background-clip:border-box;color:var(--accent);animation:none!important;}
+}
+
 @media(hover:hover) and (pointer:fine){
-  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-primary:hover{--hover-y:-2px;}
   .btn-nav:hover{transform:translateY(-1px)!important;}
+  .example-card:hover{transform:translateY(-3px);}
   .svc-card:hover{transform:translateY(-4px);}
   .result-card:hover{transform:translateY(-3px);}
   .why-card:hover{transform:translateY(-3px);}
@@ -519,15 +559,15 @@ footer{background:var(--navy);padding:28px 52px;border-top:1px solid var(--borde
   .perf-tag:hover{transform:translateY(-1px);background:rgba(201,169,110,0.16);}
 }
 @media(hover:none),(pointer:coarse){
-  .btn-primary:hover,.btn-nav:hover,.svc-card:hover,.result-card:hover,.why-card:hover,.process-step:hover,.perf-tag:hover{transform:none!important;}
+  .btn-primary:hover,.btn-nav:hover,.example-card:hover,.svc-card:hover,.result-card:hover,.why-card:hover,.process-step:hover,.perf-tag:hover{transform:none!important;}
 }
-.btn-primary:active{transform:scale(0.97);}
+.btn-primary:active{--press-scale:0.97;}
 .btn-nav:active{transform:scale(0.97)!important;}
 .btn-outline:active,.lang-btn:active{transform:scale(0.97);}
 
 /* ── RESPONSIVE ── */
 @media(max-width:1024px){
-  #hero{grid-template-columns:1fr;padding:100px 32px 80px;gap:40px;}
+  #hero{grid-template-columns:1fr;padding:156px 32px 88px;gap:40px;}
   .hero-left{width:100%;max-width:720px;}
   .hero-right{position:absolute;right:32px;top:150px;width:min(330px,38vw);opacity:0.16;pointer-events:none;justify-content:flex-end;}
   .hero-logo-large{max-width:330px;}
@@ -555,7 +595,7 @@ footer{background:var(--navy);padding:28px 52px;border-top:1px solid var(--borde
   .nav-links .social-link{display:inline-flex;width:34px;height:34px;padding:0;border:1px solid rgba(201,169,110,0.34);}
   nav.menu-open .nav-links{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0) scale(1);}
   .hero-right{display:none;}
-  #hero{display:block;padding-top:128px;overflow:hidden;}
+  #hero{display:block;padding-top:168px;overflow:hidden;}
   .hero-left{width:calc(100vw - 40px);max-width:calc(100vw - 40px);}
   h1.hero-h1{width:calc(100vw - 40px);max-width:calc(100vw - 40px);font-size:clamp(30px,8.1vw,36px);line-height:1.08;letter-spacing:-0.02em;overflow-wrap:break-word;}
   .mobile-break{display:block;}
@@ -565,7 +605,15 @@ footer{background:var(--navy);padding:28px 52px;border-top:1px solid var(--borde
   .hero-feat:last-child{border-bottom:none;}
   .hero-btns{flex-direction:column;align-items:stretch;width:calc(100vw - 40px);}
   .btn-primary,.btn-outline{width:100%;justify-content:center;}
-  #hero,#result,#services,#performance,#why,#process,#cta-footer{padding-left:20px;padding-right:20px;}
+  #hero,#examples,#result,#services,#performance,#why,#process,#cta-footer{padding-left:20px;padding-right:20px;}
+  #examples{padding-top:62px;padding-bottom:64px;}
+  .examples-head{margin-bottom:30px;}
+  .examples-intro{font-size:14px;line-height:1.72;}
+  .examples-grid{grid-template-columns:1fr;}
+  .example-card{min-height:auto;padding:28px 24px 24px;}
+  .example-text{margin-bottom:20px;}
+  .examples-cta{margin-top:30px;padding-top:24px;}
+  #examples .btn-primary{width:auto;min-width:220px;}
   .result-logo-band{margin-bottom:24px;justify-content:flex-start;}
   .result-logo-large{max-width:280px;}
   .services-top{flex-direction:column;align-items:flex-start;}
@@ -580,27 +628,113 @@ footer{background:var(--navy);padding:28px 52px;border-top:1px solid var(--borde
   .form-actions{align-items:stretch;}
   footer{padding:24px 20px;flex-direction:column;align-items:flex-start;}
   .footer-left{align-items:flex-start;flex-direction:column;gap:12px;}
+  nav{height:88px;padding:0 18px;}
+  .nav-brand{max-width:42vw;}
+  .nav-logo-img{height:18px;max-width:100%;}
+  .nav-right{gap:10px;}
+  .lang-group{gap:1px;}
+  .lang-btn{font-size:9px;padding:6px 5px;letter-spacing:0.10em;}
+  .nav-toggle{display:inline-flex;width:42px;height:42px;flex:0 0 42px;}
+  .nav-links{top:88px;left:16px;right:16px;padding:12px;background:linear-gradient(180deg,rgba(20,32,56,0.985),rgba(12,20,36,0.97));box-shadow:0 24px 70px rgba(0,0,0,0.36),inset 0 1px 0 rgba(255,255,255,0.06);}
+  .nav-links a{min-height:44px;padding:13px 12px;font-size:10px;letter-spacing:0.14em;}
+  .nav-links .btn-nav{width:100%;min-height:42px;margin-top:12px;padding:12px 14px!important;}
+  .nav-links .social-links{gap:10px;padding:12px 12px 4px;}
+  .nav-links .social-link{width:36px;height:36px;}
+  #hero{padding-top:142px;padding-bottom:64px;min-height:100svh;}
+  .hero-left{width:100%;max-width:none;}
+  h1.hero-h1{width:100%;max-width:none;font-size:clamp(34px,9.1vw,42px);line-height:1.06;letter-spacing:-0.018em;margin-bottom:16px;}
+  .mobile-break{display:none;}
+  .hero-tagline{width:100%;max-width:560px;font-size:15.5px;line-height:1.62;margin-bottom:26px;}
+  .hero-eyebrow{margin-bottom:26px;}
+  .hero-features{width:100%;max-width:560px;margin-bottom:30px;}
+  .hero-btns{width:100%;max-width:560px;gap:10px;}
+  .btn-primary,.btn-outline{min-height:46px;}
+  .hero-proof-row{width:100%;max-width:560px;gap:8px;margin-top:24px;border:0;background:transparent;box-shadow:none;backdrop-filter:none;}
+  .hero-proof-item{padding:14px 15px;border:1px solid rgba(255,255,255,0.10);background:linear-gradient(180deg,rgba(255,255,255,0.065),rgba(255,255,255,0.032));box-shadow:inset 0 1px 0 rgba(255,255,255,0.05);}
+  #examples,#result,#services,#performance,#why,#process,#cta-footer{padding-top:68px;padding-bottom:68px;}
+  #examples{padding-top:62px;padding-bottom:64px;}
+  .h2-light,.h2-dark,.cta-f-h2{font-size:clamp(31px,8vw,40px);line-height:1.08;}
+  .section-eyebrow{margin-bottom:14px;}
+  .result-body,.services-sub,.perf-body,.why-sub,.process-sub,.cta-f-sub{font-size:14px;line-height:1.75;margin-bottom:34px;}
+  .services-grid,.why-grid,.process-steps{gap:8px;background:transparent;border:0;box-shadow:none;}
+  .svc-card,.why-card,.process-step{padding:28px 24px;box-shadow:0 12px 34px rgba(11,17,32,0.08);}
+  .process-step{border:1px solid rgba(255,255,255,0.08);}
+  .ps-connector{display:none;}
+  .contact-form{margin-top:28px;padding:22px 18px;}
+  .form-input,.form-select{min-height:48px;}
+  .form-textarea{min-height:118px;}
+  .form-note{max-width:none;}
+  .form-submit{width:100%;}
+  footer{align-items:center;text-align:center;padding:26px 20px;}
+  .footer-left{align-items:center;}
+  .footer-copy{width:100%;text-align:center;line-height:1.6;}
 }
+@media(min-width:641px) and (max-width:768px){
+  .hero-btns{flex-direction:row;align-items:center;width:auto;}
+  .hero-btns .btn-primary,.hero-btns .btn-outline{width:auto;}
+  .hero-proof-row{grid-template-columns:repeat(3,minmax(0,1fr));max-width:620px;}
+  .examples-grid,.services-grid,.why-grid,.process-steps{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .examples-grid .example-card:last-child{grid-column:1/-1;}
+}
+
+/* ── MULTI-PAGE LAYOUT ── */
+body.page-standard main>section:first-child{padding-top:210px;min-height:calc(100vh - 100px);}
+body.page-standard #cta-footer:first-child{min-height:calc(100vh - 100px);display:flex;align-items:center;}
+body.page-standard #cta-footer:first-child .cta-f-inner{width:100%;}
+@media(max-width:768px){body.page-standard main>section:first-child{padding-top:142px;min-height:auto;}}
+
+
+/* ── WEXBORNE LOADING INTRO ── */
+.wx-loader{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;overflow:hidden;background:radial-gradient(120% 120% at 50% 42%,#143053 0%,var(--navy) 56%,#081221 100%);opacity:1;visibility:visible;pointer-events:auto;transition:opacity 360ms var(--ease-out),visibility 360ms var(--ease-out);}
+.wx-loader.is-hidden{opacity:0;visibility:hidden;pointer-events:none;}
+.wx-loader::before{content:'';position:absolute;top:42%;left:50%;width:min(86vw,900px);height:min(86vw,900px);border-radius:50%;background:radial-gradient(circle,rgba(201,169,110,0.16) 0%,rgba(75,101,154,0.13) 34%,transparent 66%);filter:blur(20px);transform:translate(-50%,-50%);animation:wxVignetteBreath 5.8s var(--ease-in-out) infinite alternate;}
+.wx-loader::after{content:'';position:absolute;inset:0;background:linear-gradient(115deg,transparent 0 36%,rgba(255,255,255,0.05) 46%,rgba(201,169,110,0.12) 52%,transparent 64% 100%);mask-image:linear-gradient(90deg,transparent,black 22%,black 72%,transparent);opacity:0.64;}
+.wx-loader-inner{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:22px;padding:28px;text-align:center;}
+.wx-loader-logo{width:min(54vw,390px);height:auto;display:block;opacity:0;filter:blur(9px);transform:scale(1.06);animation:wxLogoReveal 1450ms var(--ease-out) forwards 80ms;}
+.wx-loader-kicker{font-size:10px;font-weight:400;letter-spacing:0.34em;text-transform:uppercase;color:rgba(201,169,110,0.72);opacity:0;animation:wxTextReveal 720ms var(--ease-out) forwards 620ms;}
+.wx-loader-line{width:min(220px,42vw);height:1px;background:rgba(255,255,255,0.10);overflow:hidden;opacity:0;animation:wxTextReveal 720ms var(--ease-out) forwards 760ms;}
+.wx-loader-line span{display:block;width:48%;height:100%;background:linear-gradient(90deg,transparent,var(--accent),transparent);animation:wxLineTravel 1100ms var(--ease-in-out) infinite;}
+.wx-loader.is-resolving{pointer-events:none;}
+.wx-loader.is-resolving::before,.wx-loader.is-resolving::after,.wx-loader.is-resolving .wx-loader-kicker,.wx-loader.is-resolving .wx-loader-line{opacity:0;transition:opacity 320ms var(--ease-out);}
+html.wx-loading body{cursor:wait;}
+html.wx-loading .nav-logo-img{opacity:0;}
+html.wx-logo-resolving .nav-logo-img{opacity:1;}
+.nav-logo-img{transition:opacity 320ms var(--ease-out);}
+@keyframes wxLogoReveal{to{opacity:1;filter:blur(0);transform:scale(1)}}
+@keyframes wxTextReveal{to{opacity:1}}
+@keyframes wxLineTravel{0%{transform:translateX(-110%)}100%{transform:translateX(230%)}}
+@keyframes wxVignetteBreath{from{transform:translate(-50%,-50%) scale(0.96);opacity:0.78}to{transform:translate(-50%,-50%) scale(1.08);opacity:1}}
+@media(max-width:768px){.wx-loader-logo{width:min(72vw,320px)}.wx-loader-kicker{font-size:9px;letter-spacing:0.26em}}
+@media(prefers-reduced-motion:reduce){.wx-loader,.wx-loader-logo,.wx-loader-kicker,.wx-loader-line,.wx-loader-line span{animation:none!important;transition:none!important}.wx-loader-logo,.wx-loader-kicker,.wx-loader-line{opacity:1;filter:none;transform:none}html.wx-loading .nav-logo-img{opacity:1}}
+
 </style>
 </head>
 <body>
+<div class="wx-loader" id="wx-loader" aria-hidden="true">
+  <div class="wx-loader-inner">
+    <img class="wx-loader-logo" src="wexborne-logo-transparent.png" alt="" width="817" height="202" decoding="async">
+    <div class="wx-loader-kicker">Wexborne Consulting</div>
+    <div class="wx-loader-line"><span></span></div>
+  </div>
+</div>
+
 <a href="#main" class="skip-link">Skip to main content</a>
 
 <!-- NAV -->
 <header class="site-header">
 <nav id="nav" role="navigation" aria-label="Main navigation">
-  <a href="#hero" class="nav-brand" aria-label="Wexborne Consulting — home">
+  <a href="index.html" class="nav-brand" aria-label="Wexborne Consulting — home">
     <img src="wexborne-logo-transparent.png" alt="Wexborne Consulting" class="nav-logo-img" width="817" height="202" decoding="async" fetchpriority="high">
   </a>
   <button class="nav-toggle" type="button" aria-label="Open navigation menu" aria-controls="primary-navigation" aria-expanded="false">
     <span aria-hidden="true"></span>
   </button>
   <ul class="nav-links" id="primary-navigation" role="list">
-    <li><a href="#services"    data-i18n="nav_services">Services</a></li>
-    <li><a href="#why"         data-i18n="nav_why">Why Wexborne</a></li>
-    <li><a href="#process"     data-i18n="nav_process">Process</a></li>
-    <li><a href="#cta-footer"  data-i18n="nav_contact">Contact</a></li>
-    <li class="nav-cta-item"><a href="#cta-footer"  class="btn-nav" data-i18n="nav_cta">Book a Consultation</a></li>
+    <li><a href="services.html"    data-i18n="nav_services">Services</a></li>
+    <li><a href="why-wexborne.html"         data-i18n="nav_why">Why Wexborne</a></li>
+    <li><a href="process.html"     data-i18n="nav_process">Process</a></li>
+    <li><a href="contact.html"  data-i18n="nav_contact">Contact</a></li>
+    <li class="nav-cta-item"><a href="contact.html"  class="btn-nav" data-i18n="nav_cta">Book a Consultation</a></li>
     <li class="social-item">
       <div class="social-links" role="group" aria-label="Wexborne social media">
         <a class="social-link" href="https://www.instagram.com/wexborne/" target="_blank" rel="noopener noreferrer" aria-label="Wexborne on Instagram">
@@ -620,6 +754,7 @@ footer{background:var(--navy);padding:28px 52px;border-top:1px solid var(--borde
       <button class="lang-btn"        onclick="setLang('fr')" aria-pressed="false" aria-label="Switch to French">FR</button>
     </div>
   </div>
+  <div class="nav-progress" aria-hidden="true"></div>
 </nav>
 </header>
 
@@ -631,6 +766,7 @@ footer{background:var(--navy);padding:28px 52px;border-top:1px solid var(--borde
 
 <!-- HERO -->
 <section id="hero" aria-label="Hero">
+  <div class="cursor-glow" aria-hidden="true"></div>
   <div class="hero-grid-bg" aria-hidden="true"></div>
   <div class="hero-orb-1" aria-hidden="true"></div>
   <div class="hero-left">
@@ -646,11 +782,11 @@ footer{background:var(--navy);padding:28px 52px;border-top:1px solid var(--borde
       <span class="hero-feat" data-i18n="feat_3">Measurable Results</span>
     </div>
     <div class="hero-btns">
-      <a href="#cta-footer" class="btn-primary" data-i18n="hero_cta1">
+      <a href="contact.html" class="btn-primary" data-i18n="hero_cta1">
         Book a Consultation
         <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true"><path d="M2 6.5h9M7 2.5l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
-      <a href="#services" class="btn-outline" data-i18n="hero_cta2">Explore Services</a>
+      <a href="services.html" class="btn-outline" data-i18n="hero_cta2">Explore Services</a>
     </div>
     <div class="hero-proof-row" aria-label="Wexborne advisory strengths">
       <div class="hero-proof-item">
@@ -678,354 +814,38 @@ footer{background:var(--navy);padding:28px 52px;border-top:1px solid var(--borde
   </div>
 </section>
 
-<!-- SERVICES -->
-<section id="services" aria-labelledby="services-heading">
-  <div class="services-inner">
-    <div class="result-logo-band reveal" aria-hidden="true">
-      <img src="wexborne-logo-navy-transparent.png" alt="Wexborne Consulting" class="result-logo-large" width="841" height="195" loading="lazy" decoding="async">
-    </div>
-    <div class="services-top reveal">
-      <div>
-        <div class="section-eyebrow">
-          <div class="ey-line-d"></div>
-          <span class="ey-text-d" data-i18n="svc_eyebrow">Services</span>
-        </div>
-        <h2 class="h2-dark" id="services-heading" data-i18n="svc_h2">Practical services that improve how your business works.</h2>
-      </div>
-    </div>
-    <p class="services-sub reveal" data-i18n="svc_sub">We identify where time and money are being lost, implement the right improvements, and make sure your team can use them confidently.</p>
-    <div class="services-grid" role="list">
-
-      <article class="svc-card reveal" role="listitem">
-        <span class="svc-num">01</span>
-        <h3 class="svc-title" data-i18n="s1_title">Readiness Audit</h3>
-        <p class="svc-desc" data-i18n="s1_desc">A focused review of how work moves through your business and where delays, duplication, and missed opportunities exist.</p>
-        <div class="svc-gets">
-          <div class="svc-gets-label" data-i18n="gets_label">What you get</div>
-          <div class="svc-gets-text" data-i18n="s1_gets">Process review, list of improvement opportunities, risk notes, and a prioritised shortlist of practical uses.</div>
-        </div>
-        <div class="svc-outcome">
-          <div class="svc-outcome-label" data-i18n="outcome_label">Business Outcome</div>
-          <div class="svc-outcome-text" data-i18n="s1_outcome">Shows where improvements will create value first, so you avoid wasting money on the wrong projects.</div>
-        </div>
-      </article>
-
-      <article class="svc-card reveal" role="listitem" style="transition-delay:0.05s">
-        <span class="svc-num">02</span>
-        <h3 class="svc-title" data-i18n="s2_title">Tool Implementation</h3>
-        <p class="svc-desc" data-i18n="s2_desc">We select, configure, and introduce a specific AI tool that solves a clear business problem.</p>
-        <div class="svc-gets">
-          <div class="svc-gets-label" data-i18n="gets_label">What you get</div>
-          <div class="svc-gets-text" data-i18n="s2_gets">Tool selection, setup, testing, team training, and clear instructions for everyday use.</div>
-        </div>
-        <div class="svc-outcome">
-          <div class="svc-outcome-label" data-i18n="outcome_label">Business Outcome</div>
-          <div class="svc-outcome-text" data-i18n="s2_outcome">Ensures your team uses the system correctly and gets useful results from it.</div>
-        </div>
-      </article>
-
-      <article class="svc-card reveal" role="listitem" style="transition-delay:0.10s">
-        <span class="svc-num">03</span>
-        <h3 class="svc-title" data-i18n="s3_title">Workflow Automation</h3>
-        <p class="svc-desc" data-i18n="s3_desc">We connect systems and remove repeatable manual steps from everyday business processes.</p>
-        <div class="svc-gets">
-          <div class="svc-gets-label" data-i18n="gets_label">What you get</div>
-          <div class="svc-gets-text" data-i18n="s3_gets">Process mapping, automation build, system connections, testing, and handover instructions.</div>
-        </div>
-        <div class="svc-outcome">
-          <div class="svc-outcome-label" data-i18n="outcome_label">Business Outcome</div>
-          <div class="svc-outcome-text" data-i18n="s3_outcome">Cuts repetitive admin, reduces errors, and helps work move faster without adding staff.</div>
-        </div>
-      </article>
-
-      <article class="svc-card reveal" role="listitem" style="transition-delay:0.15s">
-        <span class="svc-num">04</span>
-        <h3 class="svc-title" data-i18n="s4_title">Agent Building</h3>
-        <p class="svc-desc" data-i18n="s4_desc">We build a defined AI assistant to answer questions, research information, or complete a recurring task.</p>
-        <div class="svc-gets">
-          <div class="svc-gets-label" data-i18n="gets_label">What you get</div>
-          <div class="svc-gets-text" data-i18n="s4_gets">Task definition, knowledge setup, instructions, testing, access controls, and team guidance.</div>
-        </div>
-        <div class="svc-outcome">
-          <div class="svc-outcome-label" data-i18n="outcome_label">Business Outcome</div>
-          <div class="svc-outcome-text" data-i18n="s4_outcome">Reduces repeated questions and support work while keeping answers and processes consistent.</div>
-        </div>
-      </article>
-
-      <article class="svc-card reveal" role="listitem" style="transition-delay:0.20s">
-        <span class="svc-num">05</span>
-        <h3 class="svc-title" data-i18n="s5_title">Strategy Roadmap</h3>
-        <p class="svc-desc" data-i18n="s5_desc">A clear plan showing which improvements to make first, what they should cost, and who should own them.</p>
-        <div class="svc-gets">
-          <div class="svc-gets-label" data-i18n="gets_label">What you get</div>
-          <div class="svc-gets-text" data-i18n="s5_gets">Priorities, expected value, costs, responsibilities, timing, and a practical implementation sequence.</div>
-        </div>
-        <div class="svc-outcome">
-          <div class="svc-outcome-label" data-i18n="outcome_label">Business Outcome</div>
-          <div class="svc-outcome-text" data-i18n="s5_outcome">Gives you a sensible investment plan tied to business priorities, rather than technology trends.</div>
-        </div>
-      </article>
-
-      <article class="svc-card reveal" role="listitem" style="transition-delay:0.25s">
-        <span class="svc-num">06</span>
-        <h3 class="svc-title" data-i18n="s6_title">Operations Retainer</h3>
-        <p class="svc-desc" data-i18n="s6_desc">Ongoing support to keep systems useful, fix problems, and improve performance after launch.</p>
-        <div class="svc-gets">
-          <div class="svc-gets-label" data-i18n="gets_label">What you get</div>
-          <div class="svc-gets-text" data-i18n="s6_gets">Regular reviews, system improvements, issue resolution, new opportunities, and updated documentation.</div>
-        </div>
-        <div class="svc-outcome">
-          <div class="svc-outcome-label" data-i18n="outcome_label">Business Outcome</div>
-          <div class="svc-outcome-text" data-i18n="s6_outcome">Keeps your systems improving instead of becoming outdated, underused, or ignored.</div>
-        </div>
-      </article>
-
-    </div>
-  </div>
-</section>
-
-<!-- RESULT-DRIVEN -->
-<section id="result" aria-labelledby="result-heading">
-  <div class="result-inner">
-    <div class="reveal">
-      <div class="section-eyebrow">
-        <div class="ey-line-a"></div>
-        <span class="ey-text-a" data-i18n="result_eyebrow">Result-Driven Advisory</span>
-      </div>
-      <h2 class="h2-light" id="result-heading" data-i18n="result_h2">Clear advice, practical delivery, and results you can measure.</h2>
-      <p class="result-body" data-i18n="result_body">Wexborne is deliberately small and senior-led. We judge every recommendation by what it will change in the day-to-day business: revenue, cost, speed, capacity, or control. We stay involved through implementation, so good ideas become working improvements rather than another presentation.</p>
-      <div class="expect-list" aria-label="What clients can expect">
-        <div class="expect-item"><div class="expect-dot" aria-hidden="true"></div><span data-i18n="expect_1">Senior advisory involvement from discovery through handover</span></div>
-        <div class="expect-item"><div class="expect-dot" aria-hidden="true"></div><span data-i18n="expect_2">Recommendations designed to work in the real business</span></div>
-        <div class="expect-item"><div class="expect-dot" aria-hidden="true"></div><span data-i18n="expect_3">Careful implementation with clear instructions for your team</span></div>
-      </div>
-    </div>
-    <div class="result-right reveal" style="transition-delay:0.1s">
-      <div class="result-card">
-        <div class="rc-num">01</div>
-        <div class="rc-title" data-i18n="rc1_title">Commercially Accountable</div>
-        <p class="rc-text" data-i18n="rc1_text">Every recommendation is tied to an operational or financial reason — speed, margin, capacity, or control.</p>
-      </div>
-      <div class="result-card">
-        <div class="rc-num">02</div>
-        <div class="rc-title" data-i18n="rc2_title">Built Around Real Workflows</div>
-        <p class="rc-text" data-i18n="rc2_text">Systems designed around the way your people actually work, not a generic software demonstration.</p>
-      </div>
-      <div class="result-card">
-        <div class="rc-num">03</div>
-        <div class="rc-title" data-i18n="rc3_title">Documentation that Survives Handover</div>
-        <p class="rc-text" data-i18n="rc3_text">Each engagement leaves the business with processes, ownership, and documentation that people can actually use.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PERFORMANCE -->
-<section id="performance" aria-labelledby="perf-heading">
-  <div class="perf-glow" aria-hidden="true"></div>
-  <div class="perf-inner">
-    <div class="reveal">
-      <div class="section-eyebrow">
-        <div class="ey-line-a"></div>
-        <span class="ey-text-a" data-i18n="perf_eyebrow">Business Performance</span>
-      </div>
-      <h2 class="h2-light" id="perf-heading" data-i18n="perf_h2">Revenue up. Manual input down.</h2>
-      <p class="perf-body" data-i18n="perf_body">The right systems reduce repetitive work, speed up responses, improve follow-up, and give owners more time for important decisions. This helps the business handle more work, win more opportunities, and operate with fewer delays.</p>
-      <div class="perf-tags" aria-label="Benefits">
-        <span class="perf-tag" data-i18n="pt1">Faster lead handling</span>
-        <span class="perf-tag" data-i18n="pt2">Lower admin load</span>
-        <span class="perf-tag" data-i18n="pt3">Better conversion support</span>
-        <span class="perf-tag" data-i18n="pt4">More scalable delivery</span>
-        <span class="perf-tag" data-i18n="pt5">More output from the same team</span>
-      </div>
-    </div>
-    <div class="reveal" style="transition-delay:0.1s">
-      <table class="perf-table" aria-label="Before and after AI implementation">
-        <thead>
-          <tr>
-            <th data-i18n="table_before">Before</th>
-            <th></th>
-            <th data-i18n="table_after">After AI Implementation</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td data-i18n="tb1">Slower lead response</td><td><span class="arrow">→</span></td><td data-i18n="ta1">Faster response times</td></tr>
-          <tr><td data-i18n="tb2">Manual follow-up</td><td><span class="arrow">→</span></td><td data-i18n="ta2">Automated follow-up</td></tr>
-          <tr><td data-i18n="tb3">Repetitive admin</td><td><span class="arrow">→</span></td><td data-i18n="ta3">Streamlined admin</td></tr>
-          <tr><td data-i18n="tb4">Fragmented workflows</td><td><span class="arrow">→</span></td><td data-i18n="ta4">Connected workflows</td></tr>
-          <tr><td data-i18n="tb5">Higher staff input</td><td><span class="arrow">→</span></td><td data-i18n="ta5">Lower manual input</td></tr>
-          <tr><td data-i18n="tb6">Lower conversion capacity</td><td><span class="arrow">→</span></td><td data-i18n="ta6">Greater revenue capacity</td></tr>
-        </tbody>
-      </table>
-      <div class="perf-effect">
-        <div class="perf-effect-label" data-i18n="effect_label">Strategic Effect</div>
-        <p class="perf-effect-text" data-i18n="effect_text">Faster responses, stronger follow-up, lower manual input, and more capacity to convert demand into revenue.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- WHY WEXBORNE -->
-<section id="why" aria-labelledby="why-heading">
-  <div class="why-inner">
-    <div class="reveal">
+<!-- REAL-WORLD EXAMPLES -->
+<section id="examples" aria-labelledby="examples-heading">
+  <div class="examples-inner">
+    <div class="examples-head reveal">
       <div class="section-eyebrow">
         <div class="ey-line-d"></div>
-        <span class="ey-text-d" data-i18n="why_eyebrow">Why Wexborne</span>
+        <span class="ey-text-d" data-i18n="examples_eyebrow">Practical Application</span>
       </div>
-      <h2 class="h2-dark" id="why-heading" data-i18n="why_h2">Experienced advice focused on what will genuinely improve the business.</h2>
-      <p class="why-sub" data-i18n="why_sub">Wexborne combines clear judgement with hands-on implementation, giving business owners practical improvements they can see and measure.</p>
+      <h2 class="h2-dark" id="examples-heading" data-i18n="examples_h2">Real-world ways we help</h2>
+      <p class="examples-intro" data-i18n="examples_intro">Every business is different, but the problems are often similar: missed enquiries, repeated admin, unclear systems, and too much manual work. Wexborne helps turn those daily friction points into simpler, more reliable operations.</p>
     </div>
-    <div class="why-grid" role="list">
-      <div class="why-card reveal" role="listitem">
-        <span class="why-num">01</span>
-        <div class="why-title" data-i18n="w1_title">Commercially Accountable</div>
-        <p class="why-text" data-i18n="w1_text">Recommendations tied to operational or financial reasons — speed, margin, capacity, or control.</p>
-      </div>
-      <div class="why-card reveal" role="listitem" style="transition-delay:0.05s">
-        <span class="why-num">02</span>
-        <div class="why-title" data-i18n="w2_title">Built Around Real Workflows</div>
-        <p class="why-text" data-i18n="w2_text">Systems designed around the way your people actually work, not a generic software demonstration.</p>
-      </div>
-      <div class="why-card reveal" role="listitem" style="transition-delay:0.10s">
-        <span class="why-num">03</span>
-        <div class="why-title" data-i18n="w3_title">Strategy Connected to Delivery</div>
-        <p class="why-text" data-i18n="w3_text">We stay involved from the initial plan through delivery, keeping every decision tied to the original business goal.</p>
-      </div>
-      <div class="why-card reveal" role="listitem" style="transition-delay:0.15s">
-        <span class="why-num">04</span>
-        <div class="why-title" data-i18n="w4_title">Documentation that Survives Handover</div>
-        <p class="why-text" data-i18n="w4_text">Each engagement is designed to leave the business with processes, ownership, and documentation that people can actually use.</p>
-      </div>
-      <div class="why-card reveal" role="listitem" style="transition-delay:0.20s">
-        <span class="why-num">05</span>
-        <div class="why-title" data-i18n="w5_title">Calm, Senior Involvement</div>
-        <p class="why-text" data-i18n="w5_text">You work closely with experienced advisers who understand the commercial priorities and day-to-day realities.</p>
-      </div>
-      <div class="why-card reveal" role="listitem" style="transition-delay:0.25s">
-        <span class="why-num">06</span>
-        <div class="why-title" data-i18n="w6_title">Support that Can Scale</div>
-        <p class="why-text" data-i18n="w6_text">Support can stay focused on one problem or continue as your systems and business needs change.</p>
-      </div>
+    <div class="examples-grid" role="list">
+      <article class="example-card reveal" role="listitem">
+        <h3 class="example-title" data-i18n="ex1_title">Service Businesses</h3>
+        <p class="example-text" data-i18n="ex1_text">For businesses that rely on calls, messages, bookings, or consultations, Wexborne can help create a clearer path from first enquiry to confirmed client.</p>
+        <p class="example-outcome" data-i18n="ex1_outcome">Fewer missed leads. Faster follow-up. A smoother client journey.</p>
+      </article>
+      <article class="example-card reveal" role="listitem" style="transition-delay:0.05s">
+        <h3 class="example-title" data-i18n="ex2_title">Clinics &amp; Appointment-Based Teams</h3>
+        <p class="example-text" data-i18n="ex2_text">For businesses that manage appointments, reminders, cancellations, and repeat visits, Wexborne can help reduce manual admin and improve how clients are handled.</p>
+        <p class="example-outcome" data-i18n="ex2_outcome">Better reminders. Less back-and-forth. More control over the schedule.</p>
+      </article>
+      <article class="example-card reveal" role="listitem" style="transition-delay:0.10s">
+        <h3 class="example-title" data-i18n="ex3_title">Real Estate &amp; Local Agencies</h3>
+        <p class="example-text" data-i18n="ex3_text">For teams dealing with enquiries, listings, viewings, and client follow-ups, Wexborne can help organise leads and make communication easier to manage.</p>
+        <p class="example-outcome" data-i18n="ex3_outcome">Clearer enquiries. Better lead handling. Less time lost in messages.</p>
+      </article>
     </div>
-  </div>
-</section>
-
-<!-- PROCESS -->
-<section id="process" aria-labelledby="process-heading">
-  <div class="process-inner">
-    <div class="reveal">
-      <div class="section-eyebrow">
-        <div class="ey-line-a"></div>
-        <span class="ey-text-a" data-i18n="proc_eyebrow">Process</span>
-      </div>
-      <h2 class="h2-light" id="process-heading" data-i18n="proc_h2">A clear four-step process from business problem to working improvement.</h2>
-      <p class="process-sub" data-i18n="proc_sub">You know what is being done, why it matters, who is responsible, and how success will be measured at every stage.</p>
+    <div class="examples-cta reveal">
+      <p class="examples-cta-text" data-i18n="examples_cta_line">Want to see what this could look like in your business?</p>
+      <a href="contact.html" class="btn-primary" data-i18n="examples_cta_btn">Book a Consultation</a>
     </div>
-    <div class="process-steps reveal" style="transition-delay:0.1s" role="list">
-      <div class="process-step" role="listitem">
-        <div class="ps-num">01</div>
-        <div class="ps-label" data-i18n="p1_label">Audit</div>
-        <div class="ps-title" data-i18n="p1_title">Clarity Before Investment</div>
-        <p class="ps-text" data-i18n="p1_text">We identify where time, money, and opportunities are being lost, then determine which problems are worth solving first.</p>
-        <div class="ps-connector" aria-hidden="true"></div>
-      </div>
-      <div class="process-step" role="listitem">
-        <div class="ps-num">02</div>
-        <div class="ps-label" data-i18n="p2_label">Strategy</div>
-        <div class="ps-title" data-i18n="p2_title">A Practical Roadmap</div>
-        <p class="ps-text" data-i18n="p2_text">You receive a practical plan covering priorities, costs, responsibilities, timing, and expected business value.</p>
-        <div class="ps-connector" aria-hidden="true"></div>
-      </div>
-      <div class="process-step" role="listitem">
-        <div class="ps-num">03</div>
-        <div class="ps-label" data-i18n="p3_label">Implementation</div>
-        <div class="ps-title" data-i18n="p3_title">Live Systems, Properly Introduced</div>
-        <p class="ps-text" data-i18n="p3_text">We configure, build, test, and introduce the agreed improvements, then train your team to use them properly.</p>
-        <div class="ps-connector" aria-hidden="true"></div>
-      </div>
-      <div class="process-step" role="listitem">
-        <div class="ps-num">04</div>
-        <div class="ps-label" data-i18n="p4_label">Optimisation</div>
-        <div class="ps-title" data-i18n="p4_title">Measured Improvement Over Time</div>
-        <p class="ps-text" data-i18n="p4_text">Once the changes are live, we review the results, fix issues, and improve what is already creating value.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA FOOTER -->
-<section id="cta-footer" aria-labelledby="cta-heading">
-  <div class="cta-f-glow" aria-hidden="true"></div>
-  <div class="cta-f-inner reveal">
-    <div class="section-eyebrow" style="justify-content:center;margin-bottom:20px;">
-      <div class="ey-line-a"></div>
-      <span class="ey-text-a" data-i18n="cta_eyebrow">Get Started</span>
-      <div class="ey-line-a"></div>
-    </div>
-    <h2 class="cta-f-h2" data-i18n="cta_h2">Find the clearest route to better business performance.</h2>
-    <p class="cta-f-sub" data-i18n="cta_sub">Start with a focused conversation about where the business is losing time, missing opportunities, or carrying unnecessary work. We will help you define the right next step.</p>
-    <form class="contact-form" name="wexborne-consultation" method="POST" action="https://script.google.com/macros/s/AKfycbwQhLHfADohe4gsk5znbq1kZQ0K-G_0iVBklGMUXjYT-ShAC5uqLy0yw2Ae22cs_WuI/exec" target="wexborne-submit-frame">
-      <input type="hidden" name="form-name" value="wexborne-consultation">
-      <div class="contact-grid">
-        <div class="form-field">
-          <label class="form-label" for="full-name"><span data-i18n="form_full_name">Full name</span> <span class="form-required">*</span></label>
-          <input class="form-input" id="full-name" name="fullName" type="text" autocomplete="name" required>
-        </div>
-        <div class="form-field">
-          <label class="form-label" for="business-name"><span data-i18n="form_business_name">Business name</span> <span class="form-required">*</span></label>
-          <input class="form-input" id="business-name" name="businessName" type="text" autocomplete="organization" required>
-        </div>
-        <div class="form-field">
-          <label class="form-label" for="email-address"><span data-i18n="form_email">Email address</span> <span class="form-required">*</span></label>
-          <input class="form-input" id="email-address" name="email" type="email" autocomplete="email" required>
-        </div>
-        <div class="form-field">
-          <label class="form-label" for="phone-number"><span data-i18n="form_phone">Phone number</span> <span class="form-required">*</span></label>
-          <input class="form-input" id="phone-number" name="phone" type="tel" autocomplete="tel" required>
-        </div>
-        <div class="form-field full">
-          <label class="form-label" for="save-input-time"><span data-i18n="form_services">Ways you are looking to save input and time</span> <span class="form-required">*</span></label>
-          <textarea class="form-textarea" id="save-input-time" name="saveTime" required></textarea>
-        </div>
-        <div class="form-field full">
-          <label class="form-label" for="business-description"><span data-i18n="form_business_do">What does your business do?</span> <span class="form-required">*</span></label>
-          <textarea class="form-textarea" id="business-description" name="businessDescription" required></textarea>
-        </div>
-        <div class="form-field">
-          <label class="form-label" for="estimated-budget"><span data-i18n="form_budget">What is your estimated budget?</span> <span class="form-required">*</span></label>
-          <select class="form-select" id="estimated-budget" name="budget" required>
-            <option value="" data-i18n="budget_placeholder">Select a budget range</option>
-            <option value="€0 - €500" data-i18n="budget_under_5k">€0 - €500</option>
-            <option value="€500 - €1,000" data-i18n="budget_5_10">€500 - €1,000</option>
-            <option value="€1,000 - €2,500" data-i18n="budget_10_25">€1,000 - €2,500</option>
-            <option value="€2,500 - €5,000" data-i18n="budget_25_50">€2,500 - €5,000</option>
-            <option value="€5,000 - €10,000" data-i18n="budget_50_plus">€5,000 - €10,000</option>
-            <option value="€10,000+" data-i18n="budget_10_plus">€10,000+</option>
-            <option value="Not sure yet" data-i18n="budget_unsure">Not sure yet</option>
-          </select>
-        </div>
-        <div class="form-field">
-          <label class="form-label" for="contact-method"><span data-i18n="form_contact_method">What is your preferred contact method?</span> <span class="form-required">*</span></label>
-          <select class="form-select" id="contact-method" name="contactMethod" required>
-            <option value="" data-i18n="contact_placeholder">Select a contact method</option>
-            <option value="Email" data-i18n="contact_email">Email</option>
-            <option value="Phone" data-i18n="contact_phone">Phone</option>
-            <option value="WhatsApp" data-i18n="contact_whatsapp">WhatsApp</option>
-          </select>
-        </div>
-      </div>
-      <label class="form-choice form-consent">
-        <input type="checkbox" name="consent" required>
-        <span data-i18n="form_consent">I consent to be contacted by Wexborne Consulting about this enquiry.</span>
-      </label>
-      <div class="form-actions">
-        <p class="form-note" data-i18n="form_note">Fields marked with * are required. Your enquiry will be used to assess fit and contact you about the next step.</p>
-        <button type="submit" class="btn-primary form-submit" data-i18n="form_submit">Submit Enquiry</button>
-        <div class="form-status" aria-live="polite"></div>
-      </div>
-    </form>
-    <iframe name="wexborne-submit-frame" title="Form submission" hidden></iframe>
   </div>
 </section>
 
@@ -1034,7 +854,7 @@ footer{background:var(--navy);padding:28px 52px;border-top:1px solid var(--borde
 <!-- FOOTER -->
 <footer role="contentinfo">
   <div class="footer-left">
-    <a href="#hero" class="footer-brand" aria-label="Wexborne Consulting — home">
+    <a href="index.html" class="footer-brand" aria-label="Wexborne Consulting — home">
       <img src="wexborne-logo-transparent.png" alt="Wexborne Consulting" class="footer-logo-img" width="817" height="202" loading="lazy" decoding="async">
     </a>
     <div class="social-links" role="group" aria-label="Wexborne social media">
@@ -1061,6 +881,12 @@ en:{
   proof_metric_1:"Senior guidance",proof_text_1:"Experienced support from first review to handover",
   proof_metric_2:"Built for your business",proof_text_2:"Systems designed around how your team actually works",
   proof_metric_3:"Commercial focus",proof_text_3:"Every recommendation tied to profit, time, or control",
+  examples_eyebrow:"Practical Application",examples_h2:"Real-world ways we help",
+  examples_intro:"Every business is different, but the problems are often similar: missed enquiries, repeated admin, unclear systems, and too much manual work. Wexborne helps turn those daily friction points into simpler, more reliable operations.",
+  ex1_title:"Service Businesses",ex1_text:"For businesses that rely on calls, messages, bookings, or consultations, Wexborne can help create a clearer path from first enquiry to confirmed client.",ex1_outcome:"Fewer missed leads. Faster follow-up. A smoother client journey.",
+  ex2_title:"Clinics & Appointment-Based Teams",ex2_text:"For businesses that manage appointments, reminders, cancellations, and repeat visits, Wexborne can help reduce manual admin and improve how clients are handled.",ex2_outcome:"Better reminders. Less back-and-forth. More control over the schedule.",
+  ex3_title:"Real Estate & Local Agencies",ex3_text:"For teams dealing with enquiries, listings, viewings, and client follow-ups, Wexborne can help organise leads and make communication easier to manage.",ex3_outcome:"Clearer enquiries. Better lead handling. Less time lost in messages.",
+  examples_cta_line:"Want to see what this could look like in your business?",examples_cta_btn:"Book a Consultation",
   panel_label:"Projected Revenue Growth",panel_title:"Revenue Uplift Potential",
   panel_caption:"Typical improvement from optimised lead handling, faster follow-up, and AI-supported workflows.",
   badge_1:"Faster response",badge_2:"Better conversion",badge_3:"Lower friction",
@@ -1126,6 +952,12 @@ es:{
   proof_metric_1:"Criterio sénior",proof_text_1:"Apoyo experto desde la primera revisión hasta la entrega",
   proof_metric_2:"Diseñado para su empresa",proof_text_2:"Sistemas adaptados a la forma real de trabajar del equipo",
   proof_metric_3:"Enfoque comercial",proof_text_3:"Cada recomendación ligada a beneficio, tiempo o control",
+  examples_eyebrow:"Aplicación práctica",examples_h2:"Formas reales en que ayudamos",
+  examples_intro:"Cada empresa es distinta, pero los problemas suelen parecerse: consultas perdidas, administración repetida, sistemas poco claros y demasiado trabajo manual. Wexborne ayuda a convertir esos puntos de fricción diarios en operaciones más simples y fiables.",
+  ex1_title:"Empresas de servicios",ex1_text:"Para empresas que dependen de llamadas, mensajes, reservas o consultas, Wexborne puede ayudar a crear un camino más claro desde la primera consulta hasta el cliente confirmado.",ex1_outcome:"Menos oportunidades perdidas. Seguimiento más rápido. Una experiencia de cliente más fluida.",
+  ex2_title:"Clínicas y equipos con citas",ex2_text:"Para empresas que gestionan citas, recordatorios, cancelaciones y visitas recurrentes, Wexborne puede ayudar a reducir la administración manual y mejorar la atención al cliente.",ex2_outcome:"Mejores recordatorios. Menos idas y vueltas. Más control sobre la agenda.",
+  ex3_title:"Inmobiliarias y agencias locales",ex3_text:"Para equipos que gestionan consultas, anuncios, visitas y seguimiento de clientes, Wexborne puede ayudar a organizar oportunidades y hacer que la comunicación sea más fácil de gestionar.",ex3_outcome:"Consultas más claras. Mejor gestión de oportunidades. Menos tiempo perdido en mensajes.",
+  examples_cta_line:"¿Quiere ver cómo podría funcionar esto en su empresa?",examples_cta_btn:"Solicitar una consulta",
   panel_label:"Crecimiento de ingresos previsto",panel_title:"Potencial de mejora de ingresos",
   panel_caption:"Mejora habitual mediante una gestión optimizada de oportunidades, un seguimiento más ágil y flujos de trabajo asistidos por IA.",
   badge_1:"Respuesta más ágil",badge_2:"Mejor conversión",badge_3:"Menos fricción operativa",
@@ -1178,6 +1010,12 @@ de:{
   proof_metric_1:"Erfahrene Beratung",proof_text_1:"Kompetente Begleitung von der ersten Analyse bis zur Übergabe",
   proof_metric_2:"Für Ihr Unternehmen gebaut",proof_text_2:"Systeme passend zur tatsächlichen Arbeitsweise Ihres Teams",
   proof_metric_3:"Kaufmännischer Fokus",proof_text_3:"Jede Empfehlung zielt auf Ertrag, Zeit oder Kontrolle",
+  examples_eyebrow:"Praktische Anwendung",examples_h2:"Konkrete Beispiele für unsere Unterstützung",
+  examples_intro:"Jedes Unternehmen ist anders, doch viele Probleme ähneln sich: verpasste Anfragen, wiederkehrende Verwaltung, unklare Systeme und zu viel manuelle Arbeit. Wexborne hilft, diese täglichen Reibungspunkte in einfachere und verlässlichere Abläufe zu verwandeln.",
+  ex1_title:"Dienstleistungsunternehmen",ex1_text:"Für Unternehmen, die auf Anrufe, Nachrichten, Buchungen oder Beratungsgespräche angewiesen sind, kann Wexborne einen klareren Weg von der ersten Anfrage bis zum bestätigten Kunden schaffen.",ex1_outcome:"Weniger verpasste Anfragen. Schnellere Nachverfolgung. Ein reibungsloserer Kundenweg.",
+  ex2_title:"Praxen und terminbasierte Teams",ex2_text:"Für Unternehmen, die Termine, Erinnerungen, Absagen und wiederkehrende Besuche verwalten, kann Wexborne manuelle Verwaltung reduzieren und die Kundenbetreuung verbessern.",ex2_outcome:"Bessere Erinnerungen. Weniger Hin und Her. Mehr Kontrolle über den Kalender.",
+  ex3_title:"Immobilienfirmen und lokale Agenturen",ex3_text:"Für Teams, die Anfragen, Angebote, Besichtigungen und Kundennachverfolgung bearbeiten, kann Wexborne Leads ordnen und Kommunikation leichter steuerbar machen.",ex3_outcome:"Klarere Anfragen. Bessere Lead-Bearbeitung. Weniger Zeitverlust in Nachrichten.",
+  examples_cta_line:"Möchten Sie sehen, wie das in Ihrem Unternehmen aussehen könnte?",examples_cta_btn:"Beratungsgespräch vereinbaren",
   panel_label:"Prognostizierte Umsatzentwicklung",panel_title:"Potenzial zur Umsatzsteigerung",
   panel_caption:"Typische Verbesserungen durch optimierte Bearbeitung von Anfragen, schnellere Nachverfolgung und KI-gestützte Arbeitsabläufe.",
   badge_1:"Schnellere Reaktion",badge_2:"Höhere Abschlussquote",badge_3:"Weniger operative Reibung",
@@ -1230,6 +1068,12 @@ fr:{
   proof_metric_1:"Conseil senior",proof_text_1:"Accompagnement expérimenté de la première analyse à la transmission",
   proof_metric_2:"Conçu pour votre entreprise",proof_text_2:"Systèmes adaptés à la manière dont votre équipe travaille réellement",
   proof_metric_3:"Orientation commerciale",proof_text_3:"Chaque recommandation vise le profit, le temps ou le contrôle",
+  examples_eyebrow:"Application pratique",examples_h2:"Des exemples concrets d'accompagnement",
+  examples_intro:"Chaque entreprise est différente, mais les problèmes se ressemblent souvent : demandes manquées, tâches administratives répétées, systèmes peu clairs et trop de travail manuel. Wexborne aide à transformer ces frictions quotidiennes en opérations plus simples et plus fiables.",
+  ex1_title:"Entreprises de services",ex1_text:"Pour les entreprises qui dépendent des appels, messages, réservations ou consultations, Wexborne peut aider à créer un parcours plus clair entre la première demande et le client confirmé.",ex1_outcome:"Moins d'opportunités manquées. Un suivi plus rapide. Un parcours client plus fluide.",
+  ex2_title:"Cliniques et équipes sur rendez-vous",ex2_text:"Pour les entreprises qui gèrent rendez-vous, rappels, annulations et visites régulières, Wexborne peut aider à réduire l'administration manuelle et améliorer la prise en charge des clients.",ex2_outcome:"De meilleurs rappels. Moins d'allers-retours. Plus de contrôle sur le planning.",
+  ex3_title:"Immobilier et agences locales",ex3_text:"Pour les équipes qui traitent demandes, annonces, visites et suivis clients, Wexborne peut aider à organiser les contacts et rendre la communication plus facile à gérer.",ex3_outcome:"Des demandes plus claires. Une meilleure gestion des contacts. Moins de temps perdu dans les messages.",
+  examples_cta_line:"Voulez-vous voir à quoi cela pourrait ressembler dans votre entreprise ?",examples_cta_btn:"Demander un entretien",
   panel_label:"Croissance de revenus projetée",panel_title:"Potentiel d'amélioration des revenus",
   panel_caption:"Amélioration généralement obtenue grâce à une meilleure gestion des opportunités, un suivi plus rapide et des flux de travail assistés par l'IA.",
   badge_1:"Réponse plus rapide",badge_2:"Meilleure conversion",badge_3:"Moins de friction opérationnelle",
@@ -1275,6 +1119,8 @@ fr:{
 };
 
 function setLang(lang){
+  if(!T[lang])lang='en';
+  try{localStorage.setItem('wexborneLang',lang);}catch(e){}
   document.querySelectorAll('.lang-btn').forEach(b=>{
     const a=b.textContent.trim().toLowerCase()===lang;
     b.classList.toggle('active',a);
@@ -1288,6 +1134,8 @@ function setLang(lang){
     else el.innerHTML=t[k];
   });
 }
+const savedLang=(()=>{try{return localStorage.getItem('wexborneLang')||'en';}catch(e){return 'en';}})();
+setLang(savedLang);
 
 const navEl=document.getElementById('nav');
 const navToggle=document.querySelector('.nav-toggle');
@@ -1333,10 +1181,196 @@ if(contactForm){
   });
 }
 
+
+
+const wxLoader=document.getElementById('wx-loader');
+const wxReduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const wxLoaderLogo=wxLoader?wxLoader.querySelector('.wx-loader-logo'):null;
+const wxNavLogo=document.querySelector('.nav-logo-img');
+if(wxLoader&&!wxReduceMotion)document.documentElement.classList.add('wx-loading');
+function wxShowLoader(){
+  if(!wxLoader)return;
+  document.documentElement.classList.add('wx-loading');
+  document.documentElement.classList.remove('wx-logo-resolving');
+  wxLoader.classList.remove('is-hidden','is-resolving');
+}
+function wxFinishLoader(){
+  if(!wxLoader)return;
+  wxLoader.classList.add('is-hidden');
+  wxLoader.classList.remove('is-resolving');
+  document.documentElement.classList.remove('wx-loading','wx-logo-resolving');
+}
+function wxResolveLoader(){
+  if(!wxLoader)return;
+  if(wxReduceMotion||!wxLoaderLogo||!wxNavLogo||typeof wxLoaderLogo.animate!=='function'){
+    wxFinishLoader();
+    return;
+  }
+  const from=wxLoaderLogo.getBoundingClientRect();
+  const to=wxNavLogo.getBoundingClientRect();
+  if(!from.width||!from.height||!to.width||!to.height){
+    wxFinishLoader();
+    return;
+  }
+  const deltaX=(to.left+to.width/2)-(from.left+from.width/2);
+  const deltaY=(to.top+to.height/2)-(from.top+from.height/2);
+  const scale=to.width/from.width;
+  wxLoader.classList.add('is-resolving');
+  document.documentElement.classList.add('wx-logo-resolving');
+  const logoAnimation=wxLoaderLogo.animate([
+    {transform:'translate3d(0,0,0) scale(1)',opacity:1,filter:'blur(0)'},
+    {transform:`translate3d(${deltaX}px,${deltaY}px,0) scale(${scale})`,opacity:0,filter:'blur(0)'}
+  ],{duration:820,easing:'cubic-bezier(0.77,0,0.175,1)',fill:'forwards'});
+  const loaderFade=wxLoader.animate([
+    {opacity:1},
+    {opacity:0}
+  ],{duration:420,delay:420,easing:'cubic-bezier(0.23,1,0.32,1)',fill:'forwards'});
+  logoAnimation.finished.catch(()=>{}).then(()=>{
+    wxFinishLoader();
+    logoAnimation.cancel();
+    loaderFade.cancel();
+  });
+}
+function wxHideLoader(delay){
+  if(!wxLoader)return;
+  window.setTimeout(wxResolveLoader,wxReduceMotion?120:delay);
+}
+window.addEventListener('pageshow',()=>{
+  let isPageTransition=false;
+  try{isPageTransition=sessionStorage.getItem('wxPageTransition')==='1';sessionStorage.removeItem('wxPageTransition');}catch(e){}
+  wxHideLoader(isPageTransition?1500:1650);
+});
+document.querySelectorAll('a[href]').forEach(link=>{
+  link.addEventListener('click',event=>{
+    if(event.defaultPrevented||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
+    if(link.target==='_blank'||link.hasAttribute('download'))return;
+    const href=link.getAttribute('href');
+    if(!href||href.startsWith('#')||href.startsWith('mailto:')||href.startsWith('tel:'))return;
+    const url=new URL(href,window.location.href);
+    if(url.origin!==window.location.origin)return;
+    if(url.pathname===window.location.pathname&&url.hash===window.location.hash)return;
+    event.preventDefault();
+    try{sessionStorage.setItem('wxPageTransition','1');}catch(e){}
+    window.location.href=url.href;
+  });
+});
+
 // Nav scroll
 window.addEventListener('scroll',()=>{
   navEl.classList.toggle('scrolled',window.scrollY>40);
 },{passive:true});
+const navProgress=document.querySelector('.nav-progress');
+let navProgressTicking=false;
+function updateNavProgress(){
+  navProgressTicking=false;
+  if(!navProgress||wxReduceMotion)return;
+  const scrollRoot=document.scrollingElement||document.documentElement;
+  const maxScroll=Math.max(scrollRoot.scrollHeight-scrollRoot.clientHeight,1);
+  const progress=Math.min(Math.max(window.scrollY/maxScroll,0),1);
+  navProgress.style.transform=`scaleX(${progress})`;
+}
+function requestNavProgressUpdate(){
+  if(wxReduceMotion||navProgressTicking)return;
+  navProgressTicking=true;
+  requestAnimationFrame(updateNavProgress);
+}
+if(navProgress&&!wxReduceMotion){
+  updateNavProgress();
+  window.addEventListener('scroll',requestNavProgressUpdate,{passive:true});
+  window.addEventListener('resize',requestNavProgressUpdate,{passive:true});
+}
+
+// Magnetic primary buttons
+const magneticButtons=document.querySelectorAll('.btn-primary');
+const magneticPointer=window.matchMedia('(hover: hover) and (pointer: fine)');
+const magneticRadius=40;
+const magneticMax=6;
+let magneticFrame=null;
+let magneticEvent=null;
+function resetMagneticButton(button){
+  button.classList.remove('is-magnetic');
+  button.style.setProperty('--mag-x','0px');
+  button.style.setProperty('--mag-y','0px');
+}
+function updateMagneticButtons(){
+  magneticFrame=null;
+  if(wxReduceMotion||!magneticPointer.matches)return;
+  const event=magneticEvent;
+  if(!event)return;
+  magneticButtons.forEach(button=>{
+    const rect=button.getBoundingClientRect();
+    const near=event.clientX>=rect.left-magneticRadius&&event.clientX<=rect.right+magneticRadius&&event.clientY>=rect.top-magneticRadius&&event.clientY<=rect.bottom+magneticRadius;
+    if(!near){
+      resetMagneticButton(button);
+      return;
+    }
+    const centerX=rect.left+rect.width/2;
+    const centerY=rect.top+rect.height/2;
+    const rangeX=rect.width/2+magneticRadius;
+    const rangeY=rect.height/2+magneticRadius;
+    const offsetX=Math.max(-magneticMax,Math.min(magneticMax,((event.clientX-centerX)/rangeX)*magneticMax));
+    const offsetY=Math.max(-magneticMax,Math.min(magneticMax,((event.clientY-centerY)/rangeY)*magneticMax));
+    button.classList.add('is-magnetic');
+    button.style.setProperty('--mag-x',`${offsetX.toFixed(2)}px`);
+    button.style.setProperty('--mag-y',`${offsetY.toFixed(2)}px`);
+  });
+}
+if(magneticButtons.length&&!wxReduceMotion&&magneticPointer.matches){
+  document.addEventListener('mousemove',event=>{
+    magneticEvent=event;
+    if(!magneticFrame)magneticFrame=requestAnimationFrame(updateMagneticButtons);
+  },{passive:true});
+  magneticButtons.forEach(button=>button.addEventListener('mouseleave',()=>resetMagneticButton(button),{passive:true}));
+}
+
+// Soft cursor glow for dark sections
+const cursorGlowPointer=window.matchMedia('(hover: hover) and (pointer: fine)');
+if(!wxReduceMotion&&cursorGlowPointer.matches){
+  document.querySelectorAll('#hero,#process,#cta-footer').forEach(section=>{
+    const glow=section.querySelector('.cursor-glow');
+    if(!glow)return;
+    let targetX=section.clientWidth/2;
+    let targetY=section.clientHeight/2;
+    let currentX=targetX;
+    let currentY=targetY;
+    let glowFrame=null;
+    let glowActive=false;
+    const glowSize=420;
+    const updateGlow=()=>{
+      currentX+=(targetX-currentX)*0.14;
+      currentY+=(targetY-currentY)*0.14;
+      glow.style.transform=`translate3d(${(currentX-glowSize/2).toFixed(1)}px,${(currentY-glowSize/2).toFixed(1)}px,0)`;
+      if(glowActive||Math.abs(targetX-currentX)>0.5||Math.abs(targetY-currentY)>0.5){
+        glowFrame=requestAnimationFrame(updateGlow);
+      }else{
+        glowFrame=null;
+      }
+    };
+    const requestGlowFrame=()=>{if(!glowFrame)glowFrame=requestAnimationFrame(updateGlow);};
+    const setGlowTarget=event=>{
+      const rect=section.getBoundingClientRect();
+      targetX=Math.max(0,Math.min(rect.width,event.clientX-rect.left));
+      targetY=Math.max(0,Math.min(rect.height,event.clientY-rect.top));
+      glowActive=true;
+      glow.style.opacity='1';
+      requestGlowFrame();
+    };
+    section.addEventListener('mouseenter',event=>{
+      setGlowTarget(event);
+      currentX=targetX;
+      currentY=targetY;
+      glowActive=true;
+      glow.style.opacity='1';
+      requestGlowFrame();
+    },{passive:true});
+    section.addEventListener('mousemove',setGlowTarget,{passive:true});
+    section.addEventListener('mouseleave',()=>{
+      glowActive=false;
+      glow.style.opacity='0';
+      requestGlowFrame();
+    },{passive:true});
+  });
+}
 
 // Scroll reveal
 const ro=new IntersectionObserver(entries=>{
@@ -1346,3 +1380,4 @@ document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
 </script>
 </body>
 </html>
+
